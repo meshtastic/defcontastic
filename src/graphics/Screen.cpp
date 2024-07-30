@@ -152,17 +152,19 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
     // needs to be drawn relative to x and y
 
     // draw centered icon left to right and centered above the one line of app text
-    display->drawXbm(x + (SCREEN_WIDTH - icon_width) / 2, y + (SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM - icon_height) / 2 + 2,
+    display->drawXbm(x + (SCREEN_WIDTH - icon_width) / 2, y + (SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM - icon_height) / 2 + 10,
                      icon_width, icon_height, icon_bits);
 
-    display->setFont(FONT_MEDIUM);
-    display->setTextAlignment(TEXT_ALIGN_LEFT);
+    if (SCREEN_HEIGHT > 64) {
+        display->setFont(FONT_MEDIUM);
+        display->setTextAlignment(TEXT_ALIGN_LEFT);
 #ifdef SPLASH_TITLE_USERPREFS
-    const char *title = SPLASH_TITLE_USERPREFS;
+        const char *title = SPLASH_TITLE_USERPREFS;
 #else
-    const char *title = "meshtastic.org";
+        const char *title = "meshtastic.org";
 #endif
-    display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
+        display->drawString(x + getStringCenteredX(title), y + SCREEN_HEIGHT - FONT_HEIGHT_MEDIUM, title);
+    }
     display->setFont(FONT_SMALL);
 
     // Draw region in upper left
@@ -171,7 +173,7 @@ static void drawIconScreen(const char *upperMsg, OLEDDisplay *display, OLEDDispl
 
     // Draw version and short name in upper right
     char buf[25];
-    snprintf(buf, sizeof(buf), "%s\n%s", xstr(APP_VERSION_SHORT), haveGlyphs(owner.short_name) ? owner.short_name : "");
+    snprintf(buf, sizeof(buf), "%s\n%s", "Meshtastic", haveGlyphs(owner.short_name) ? owner.short_name : "");
 
     display->setTextAlignment(TEXT_ALIGN_RIGHT);
     display->drawString(x + SCREEN_WIDTH, y + 0, buf);
@@ -1667,9 +1669,7 @@ void Screen::setup()
         } else
 #endif
         {
-            // Draw region in upper left
-            const char *region = myRegion ? myRegion->name : NULL;
-            drawIconScreen(region, display, state, x, y);
+            drawIconScreen(SCREEN_HEIGHT > 64 ? "DEF CON 32" : "DEF CON\n32", display, state, x, y);
         }
     };
     ui->setFrames(alertFrames, 1);
