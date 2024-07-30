@@ -1,5 +1,6 @@
 #ifndef _USERPREFS_
 #define _USERPREFS_
+
 // Uncomment and modify to set device defaults
 
 #define CONFIG_LORA_REGION_USERPREFS meshtastic_Config_LoRaConfig_RegionCode_US
@@ -7,6 +8,7 @@
 #define LORACONFIG_CHANNEL_NUM_USERPREFS 31
 #define CONFIG_LORA_IGNORE_MQTT_USERPREFS true
 
+#define EVENT_MODE 1
 #define CHANNEL_0_PSK_USERPREFS \
     {                                                                                                                            \
         0x38, 0x4b, 0xbc, 0xc0, 0x1d, 0xc0, 0x22, 0xd1, 0x81, 0xbf, 0x36, 0xb8, 0x61, 0x21, 0xe1, 0xfb, 0x96, 0xb7, 0x2e, 0x55,  \
