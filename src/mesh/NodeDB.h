@@ -20,8 +20,8 @@ DeviceState versions used to be defined in the .proto file but really only this 
 #define SEGMENT_DEVICESTATE 4
 #define SEGMENT_CHANNELS 8
 
-#define DEVICESTATE_CUR_VER 23
-#define DEVICESTATE_MIN_VER 22
+#define DEVICESTATE_CUR_VER 24
+#define DEVICESTATE_MIN_VER 24
 
 extern meshtastic_DeviceState devicestate;
 extern meshtastic_ChannelFile channelFile;
@@ -126,7 +126,7 @@ class NodeDB
 
     void initConfigIntervals(), initModuleConfigIntervals(), resetNodes(), removeNodeByNum(NodeNum nodeNum);
 
-    bool factoryReset();
+    bool factoryReset(bool removeBonds = true);
 
     LoadFileResult loadProto(const char *filename, size_t protoSize, size_t objSize, const pb_msgdesc_t *fields,
                              void *dest_struct);
