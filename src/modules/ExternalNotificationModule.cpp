@@ -14,6 +14,7 @@
  * @date [Insert Date]
  */
 #include "ExternalNotificationModule.h"
+#include "../userPrefs.h"
 #include "MeshService.h"
 #include "NodeDB.h"
 #include "RTC.h"
@@ -23,7 +24,6 @@
 #include "main.h"
 #include "mesh/generated/meshtastic/rtttl.pb.h"
 #include <Arduino.h>
-
 #ifdef HAS_NCP5623
 #include <graphics/RAKled.h>
 #endif
