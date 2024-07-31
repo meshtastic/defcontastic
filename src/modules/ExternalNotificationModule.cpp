@@ -354,17 +354,8 @@ ExternalNotificationModule::ExternalNotificationModule()
     // moduleConfig.external_notification.alert_message_buzzer = true;
 
     if (moduleConfig.external_notification.enabled) {
-        if (nodeDB->loadProto(rtttlConfigFile, meshtastic_RTTTLConfig_size, sizeof(meshtastic_RTTTLConfig),
-                              &meshtastic_RTTTLConfig_msg, &rtttlConfig) != LoadFileResult::LOAD_SUCCESS) {
-            memset(rtttlConfig.ringtone, 0, sizeof(rtttlConfig.ringtone));
-#if defined(RINGTONE_USERPREFS)
-            strncpy(rtttlConfig.ringtone, RINGTONE_USERPREFS, sizeof(rtttlConfig.ringtone));
-#else
-            strncpy(rtttlConfig.ringtone,
-                    "24:d=32,o=5,b=565:f6,p,f6,4p,p,f6,p,f6,2p,p,b6,p,b6,p,b6,p,b6,p,b,p,b,p,b,p,b,p,b,p,b,p,b,p,b,1p.,2p.,p",
-                    sizeof(rtttlConfig.ringtone));
-#endif
-        }
+        memset(rtttlConfig.ringtone, 0, sizeof(rtttlConfig.ringtone));
+        strncpy(rtttlConfig.ringtone, RINGTONE_USERPREFS, sizeof(rtttlConfig.ringtone));
 
         LOG_INFO("Initializing External Notification Module\n");
 
